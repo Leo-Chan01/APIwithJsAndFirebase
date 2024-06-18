@@ -1,0 +1,11 @@
+install firebase tools
+login to firebase => firebase login
+initialize firebase (Cloud function) =>  firebase init
+select cloud functions
+npm i express (install express.js)
+npm i cors (install cors)
+
+use npm run serve : to run the script on local host
+
+to deply unto firebase 
+run firebase deploy
