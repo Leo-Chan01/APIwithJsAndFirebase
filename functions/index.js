@@ -5,23 +5,14 @@ admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
 
-const functions = require('firebase-functions');
+// const functions = require('firebase-functions');
 const express = require('express');
 const app = express();
+const port = 8000;
 
 const cors = require('cors');
 app.use(cors({ origin: true }));
-
 const db = admin.firestore();
-
-//Route: is a directory in the rest API (Not exactly the same with your file system)
-//apis go in the format of https://domain.com/api/v1/xyz
-//So the xyz is your route
-
-//CRUD - Create, Read, Update and Delete
-
-//Creating
-// app.post(); /id/
 
 app.post('/api/v1/create-user', (req, res) => {
     (async () => {
@@ -122,6 +113,18 @@ app.delete('/api/v1/delete-user/:id', (req, res) => {
     })
 })
 
+app.get('*', (req, res) => {
+    res.status(404).send('Resource not found');
+});
 
-//export the api
-exports.app = functions.https.onRequest(app);
+//export the express api
+module.exports = app;
+
+// exports.app = app.listen.onRequest(app);
+// exports.app = app.listen((){
+
+// })
+
+// app.listen(port, () => {
+//     console.log(`Server is running on http://localhost:${port}`);
+// });
